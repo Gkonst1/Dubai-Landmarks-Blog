@@ -1,0 +1,10 @@
+<header>
+	<div class="items">
+		<h1 (click)="goHome()">{{ title }}</h1>
+		<app-button 
+			*ngIf      ="displayLoginBtn('/login')" 
+			text       ={{loginBtnText}} 
+			(btnClick) ="toggleLoginLogout()"
+		></app-button>
+	</div>
+</header>

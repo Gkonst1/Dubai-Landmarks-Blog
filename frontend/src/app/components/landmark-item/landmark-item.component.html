@@ -1,0 +1,13 @@
+<div class="card mb-4" style="max-width: 1000px;">
+    <div class="row no-gutters">
+        <div class="col-md-4 imageContainer">
+            <img [lazyLoad]=landmarkImage [defaultImage]=placeholder class="cardImage" alt="{{landmark?.title}} image">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title"><a [routerLink]="['/landmarks', landmark?.objectId]">{{ landmark?.title }}</a></h5>
+                <p class="card-text">{{ landmark?.short_info }}</p>
+            </div>
+        </div>
+    </div>
+</div>

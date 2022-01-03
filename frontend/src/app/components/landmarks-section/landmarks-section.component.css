@@ -1,0 +1,7 @@
+.landmarksComponent {
+	display        : flex;
+	flex-direction : column;
+	justify-content: center;
+	margin         : 5% 0;
+	align-items    : center;
+}

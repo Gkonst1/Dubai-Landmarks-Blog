@@ -1,0 +1,27 @@
+header {
+	background-color: #020e3b;
+	color           : #c6b8b3;
+	font-style      : italic;
+	height          : 75px;
+}
+
+h1 {
+	font-size: 32px;
+	cursor   : pointer;
+}
+
+.items {
+	height         : 100%;
+	display        : flex;
+	flex-direction : row;
+	justify-content: space-between;
+	align-items    : center;
+	margin         : 0 15px;
+}
+
+
+@media (max-width:540px)  {
+	h1 {
+		font-size: 24px;
+	}
+}

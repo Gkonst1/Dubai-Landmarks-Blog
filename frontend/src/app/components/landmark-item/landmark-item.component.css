@@ -1,0 +1,21 @@
+.cardImage {
+	width : 250px;
+	height: 250px;
+	margin: 2% 0;
+}
+
+.imageContainer {
+	display        : flex;
+	justify-content: center;
+	align-items    : center;
+}
+
+.card-title a {
+	color          : #020e3b;
+	text-decoration: underline;
+	cursor         : pointer;
+}
+
+.card-text {
+	color: #020e3b;
+}

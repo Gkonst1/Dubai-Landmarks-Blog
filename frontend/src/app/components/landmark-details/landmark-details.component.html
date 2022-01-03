@@ -1,0 +1,35 @@
+<div class="detailsContailer">
+    <div>
+        <div class="img-container">
+            <img class="img" [lazyLoad]=landmarkImage [defaultImage]=placeholder (click)="goToLink(landmark?.photo?.url)"/>
+        </div>
+    </div>
+    <div class="text-container">
+        <h3 contentEditable={{contentEditable}} 
+            [ngClass]="{'editable' : contentEditable}"
+            (input)="onTitleChange($event.target)"
+            >{{ landmark?.title }}</h3>
+        <p contentEditable={{contentEditable}} 
+            [ngClass]="{'editable' : contentEditable}"
+            (input)="onShortInfoChange($event.target)"
+            >{{ landmark?.short_info }}</p>
+        <p contentEditable={{contentEditable}} 
+            [ngClass]="{'editable' : contentEditable}"
+            (input)="onDescriptionChange($event.target)"
+            >{{ landmark?.description }}</p>
+    </div>
+    <div class="url">
+        <a href="{{ landmark?.url }}" target="_blank">Visit the website of {{ landmark?.title }}</a>
+        <app-button 
+            *ngIf="contentEditable" 
+            text={{saveBtnText}} 
+            (btnClick)="saveChanges()"
+            [ngStyle]="{'margin-bottom': '20px'}"
+        ></app-button>
+        <app-button 
+            *ngIf="hasSession" 
+            text={{editBtnText}} 
+            (btnClick)="toggleEditing()"
+        ></app-button>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+{
+  "name": "Dubai-Landmarks-Blog",
+  "version": "1.0.0",
+  "description": "A simple blog with Dubai landmarks.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gkonst1/Dubai-Landmarks-Blog"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "4.17.1",
+    "kerberos": "1.1.4",
+    "parse": "3.4.1",
+    "parse-dashboard": "3.3.0",
+    "parse-server": "4.10.4"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "lint": "eslint --cache ./cloud && eslint --cache index.js && eslint --cache ./spec",
+    "lint-fix": "eslint --cache --fix ./cloud && eslint --cache --fix index.js && eslint --cache --fix ./spec",
+    "prettier": "prettier --write '{cloud,spec}/{**/*,*}.js' 'index.js'",
+    "watch": "babel-watch index.js"
+  },
+  "devDependencies": {
+    "babel-eslint": "10.1.0",
+    "babel-watch": "7.4.0",
+    "eslint": "7.19.0",
+    "eslint-config-standard": "16.0.2",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "4.2.1",
+    "jasmine": "3.6.4",
+    "nodemon": "^2.0.12",
+    "nyc": "15.1.0",
+    "prettier": "2.2.1"
+  }
+}
