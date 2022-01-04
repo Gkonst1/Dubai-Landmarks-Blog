@@ -46,6 +46,12 @@
 	background-color: #020e3b;
 }
 
+.updatingMessage {
+	color: #020e3b;
+	font-weight   : bold;
+	text-align    : center;
+}
+
 @media (max-width:540px)  {
 	.detailsContailer {
 		flex-direction: column;

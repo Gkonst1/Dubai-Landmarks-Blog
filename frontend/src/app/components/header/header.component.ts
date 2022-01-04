@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
         private userService: UserService,
         private uiService: UiService) {
         this.subscription = this.uiService
-            .onToggle()
+            .onLoginButtonTextToggle()
             .subscribe((value) => {
                 this.showLogout   = value;
                 this.loginBtnText = this.showLogout ? 'Logout' : 'Login';

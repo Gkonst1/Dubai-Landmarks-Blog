@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { Landmark } from '../../interface/Landmark';
 import { LandmarkService } from '../../services/landmark/landmark.service';
-import { UpdateLandmark } from '../../interface/UpdateLandmark'
+import { UserService } from '../../services/user/user.service';
+import { UpdateLandmark } from '../../interface/UpdateLandmark';
+import { UiService } from '../../services/ui/ui.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-landmark-details',
@@ -26,10 +29,30 @@ export class LandmarkDetailsComponent implements OnInit {
     titleText: string        = '';
     shortInfoText: string    = '';
     descriptionText: string  = '';
+    loadingText: string      = 'Updating..'
+    showLoadingText?: boolean;
+    subscription?: Subscription;
 
     constructor(
         private landmarkService: LandmarkService,
-        private route: ActivatedRoute) { }
+        private userService: UserService,
+        private route: ActivatedRoute,
+        private router: Router,
+        private uiService: UiService) {
+        this.subscription = this.uiService
+            .onLoadingTextToggle()
+            .subscribe((value) => {
+                if (value) {
+                    this.loadingText     = 'Updating..';
+                    this.showLoadingText = value;       
+                } else {
+                    this.loadingText = 'Done!'
+                    setTimeout(() => {
+                        this.showLoadingText = value;               
+                    }, 1500)
+                }
+            });
+    }
 
     ngOnInit(): void {
         this.placeholder = '../../../assets/placeholder.gif';
@@ -79,7 +102,20 @@ export class LandmarkDetailsComponent implements OnInit {
         }
 
         this.landmarkService.updateLandmark(this.landmark?.objectId, update).subscribe(update => {
+            this.uiService.toggleLoadingMessage(false);
             if (!update.completed) {
+                // Logout the user if session is not valid
+                if (update.message == 'Unauthorised access') {
+                    this.userService.logout().subscribe(logout => {
+                        if (!logout.completed) {
+                            return alert(logout.message);
+                        }
+
+                        sessionStorage.removeItem('sessionToken');
+                        this.uiService.toggleLoginBtnText();
+                        this.router.navigateByUrl('/login');
+                    })
+                }
                 return alert(update.message);
             }
 

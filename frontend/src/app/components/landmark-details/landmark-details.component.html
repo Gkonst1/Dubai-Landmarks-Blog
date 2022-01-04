@@ -1,7 +1,11 @@
 <div class="detailsContailer">
     <div>
         <div class="img-container">
-            <img class="img" [lazyLoad]=landmarkImage [defaultImage]=placeholder (click)="goToLink(landmark?.photo?.url)"/>
+            <img 
+                class="img" 
+                [lazyLoad]=landmarkImage 
+                [defaultImage]=placeholder 
+                (click)="goToLink(landmark?.photo?.url)"/>
         </div>
     </div>
     <div class="text-container">
@@ -19,7 +23,14 @@
             >{{ landmark?.description }}</p>
     </div>
     <div class="url">
-        <a href="{{ landmark?.url }}" target="_blank">Visit the website of {{ landmark?.title }}</a>
+        <a 
+            href="{{ landmark?.url }}" 
+            target="_blank"
+        >Visit the website of {{ landmark?.title }}</a>
+        <p 
+            *ngIf=showLoadingText 
+            class="updatingMessage"
+        >{{ loadingText }}</p>
         <app-button 
             *ngIf="contentEditable" 
             text={{saveBtnText}} 

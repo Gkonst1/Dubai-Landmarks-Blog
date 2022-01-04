@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Landmark } from '../../interface/Landmark';
 import { environment } from '../../../environments/environment';
+import { UiService } from '../ui/ui.service';
 
 
 @Injectable({
@@ -11,7 +12,8 @@ import { environment } from '../../../environments/environment';
 
 export class LandmarkService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient,
+                private uiService: UiService) { }
 
     getLandmarks(): Observable<any> {
         return this.http.get(`${environment.apiURL}/landmarks`);
@@ -29,6 +31,7 @@ export class LandmarkService {
                 'X-Session-Token': session
             })
         }
+        this.uiService.toggleLoadingMessage(true);
         return this.http.patch(`${environment.apiURL}/landmarks/${id}`, body, httpOptions);
     }
 }

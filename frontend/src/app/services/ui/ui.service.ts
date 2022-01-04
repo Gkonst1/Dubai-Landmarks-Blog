@@ -5,18 +5,29 @@ import { Observable, Subject } from 'rxjs';
     providedIn: 'root'
 })
 export class UiService {
-    private showLogoutText: boolean = false;
-    private subject = new Subject<any>();
+    private showLogoutText: boolean      = false;
+    private showLoadingMessage: boolean  = false;
+    private loginSubject: Subject<any>   = new Subject<any>();
+    private loadingSubject: Subject<any> = new Subject<any>();
 
     constructor() { }
 
     toggleLoginBtnText(): void {
         const hasSession = sessionStorage.getItem('sessionToken') || '';
         this.showLogoutText = hasSession ? true : false;
-        this.subject.next(this.showLogoutText);
+        this.loginSubject.next(this.showLogoutText);
     }
 
-    onToggle(): Observable<any> {
-        return this.subject.asObservable();
+    toggleLoadingMessage(shouldShowLoadingMessage: boolean): void {
+        this.showLoadingMessage = shouldShowLoadingMessage;
+        this.loadingSubject.next(this.showLoadingMessage);
+    }
+
+    onLoginButtonTextToggle(): Observable<any> {
+        return this.loginSubject.asObservable();
+    }
+
+    onLoadingTextToggle(): Observable<any> {
+        return this.loadingSubject.asObservable();
     }
 }
