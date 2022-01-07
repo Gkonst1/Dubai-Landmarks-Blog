@@ -21,7 +21,7 @@ router.get('/landmarks', async (req, res) => {
 		const landmarks = await query.find();
 
 		if (!landmarks) {
-			return await res.status(404).send({ message: "Sorry something went wrong.. Please try again.", completed: false });
+			return await res.status(400).send({ message: "Sorry something went wrong.. Please try again.", completed: false });
 		}
 
 	res.status(200).send({ landmarks, completed: true });
@@ -43,7 +43,7 @@ router.get('/landmarks/:id', async (req, res) => {
 		const landmark = await query.first();
 
 		if (!landmark) {
-			return await res.status(404).send({ message: "Landmark not found..", completed: false });
+			return await res.status(200).send({ message: "Landmark not found..", completed: false });
 		}
 
 		res.status(200).send({ landmark, completed: true });
@@ -65,7 +65,7 @@ router.patch('/landmarks/:id', auth, async (req, res) => {
 		const landmark = await query.first();
 
 		if (!landmark) {
-			return await res.status(404).send({ message: "Landmark not found..", completed: false });
+			return await res.status(200).send({ message: "Landmark not found..", completed: false });
 		}
 
 		for (key of Object.keys(req.body)) {

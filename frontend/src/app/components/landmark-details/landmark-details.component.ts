@@ -68,7 +68,9 @@ export class LandmarkDetailsComponent implements OnInit {
         const id = this.route.snapshot.paramMap.get('id') ?? '';
         this.landmarkService.getOneLandmark(id).subscribe((landmark) => {
             if (!landmark.completed) {
-                alert('Sorry, something went wrong. Please try again.')
+                alert('Sorry, something went wrong. Please try again.');
+                this.router.navigateByUrl('/');
+                return;
             }
             this.landmark        = landmark.landmark;
             this.titleText       = landmark.landmark.title;

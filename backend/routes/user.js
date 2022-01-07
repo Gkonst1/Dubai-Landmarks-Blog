@@ -12,7 +12,7 @@ Parse.User.enableUnsafeCurrentUser();
  */
 router.post("/users/login", async (req, res) => {
 	if (!req.body.username || !req.body.password) {
-		return await res.status(400).send({ message: "Sorry, username or password is missing. Please try again.", completed: false });
+		return await res.status(200).send({ message: "Sorry, username or password is missing. Please try again.", completed: false });
 	}
 
 	/**
@@ -47,7 +47,7 @@ router.post("/users/logout", async (req, res) => {
 		await Parse.User.logOut()
 		res.status(200).send({ completed: true });
 	} catch (error) {
-		res.status(200).send({ message:"Login failed.. Please try again", completed: false });
+		res.status(200).send({ message:"Logout failed.. Please try again", completed: false });
 	}
 })
 
